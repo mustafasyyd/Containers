@@ -1,0 +1,16 @@
+services:
+  api:
+    image: nginx
+    container_name: DB_API
+    ports: 
+      - "8080:80"
+
+    volumes:
+      - logs_volume:/logs
+  
+    environment:
+      API_NAME: database_api
+      DB_HOST: DB
+
+volumes:
+  logs_volume:

@@ -1,0 +1,17 @@
+services:
+  api:
+    environment:
+      TYPE: API
+
+    ports: 
+      - "3001:80"
+    container_name: my_api
+    image: nginx
+
+  db:
+    image: nginx
+    container_name: my_db
+    ports:
+      - "3000:80"
+    environment:
+      TYPE: DB
