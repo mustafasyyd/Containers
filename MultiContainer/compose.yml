@@ -1,0 +1,22 @@
+services:
+  api:
+    image: nginx  
+    ports:
+      - "3005:80"
+    volumes:
+      - v1:/logs
+
+
+  db:
+    image: mysql:8
+    environment: 
+      MYSQL_ROOT_PASSWORD: secret
+    ports: 
+      - "3006:80"
+    volumes:
+      - V1:/logs
+
+    
+volumes:
+  v1:
+  V1:
