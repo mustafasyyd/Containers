@@ -1,0 +1,41 @@
+name: Docker Compose Trivy Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Set up Docker
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    # Build images using Docker Compose
+    - name: Build Docker Compose images
+      run: docker compose build
+
+    # Scan web image
+    - name: Scan Web App image with Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: docker-web-db_web:latest
+        format: table
+        exit-code: '1'
+
+    # Scan DB image
+    - name: Scan DB image with Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: postgres:15
+        format: table
+        exit-code: '1'
+

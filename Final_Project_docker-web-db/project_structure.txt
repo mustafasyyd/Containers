@@ -1,0 +1,11 @@
+docker-web-db/
+│
+├── app/
+│   ├── app.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── docker-compose.yml
+├── .dockerignore
+└── .github/workflows/docker-scan.yml
+
