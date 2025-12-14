@@ -1,0 +1,6 @@
+.
+├── Dockerfile
+├── app.py
+└── container_structure.txt
+
+0 directories, 3 files
