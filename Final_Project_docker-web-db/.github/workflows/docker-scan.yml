@@ -1,4 +1,4 @@
-name: Docker Compose Trivy Scan
+name: Docker Compose Trivy Scan - web+db project
 
 on:
   push:
