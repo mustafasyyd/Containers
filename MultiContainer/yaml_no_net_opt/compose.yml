@@ -1,8 +1,6 @@
 services:
   api:
-    image: nginx
-    networks:
-      - web_network  
+    image: nginx  
     ports:
       - "3005:80"
     volumes:
@@ -13,21 +11,12 @@ services:
     image: mysql:8
     environment: 
       MYSQL_ROOT_PASSWORD: secret
-    networks:
-      - web_network    
     ports: 
       - "3006:80"
     volumes:
       - V1:/logs
 
-
-
-networks:
-  web_network:
-    driver: bridge
-
+    
 volumes:
   v1:
   V1:
-
-
