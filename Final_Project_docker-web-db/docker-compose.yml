@@ -1,28 +1,58 @@
+networks:
+  app_network:
+    driver: bridge
+
 services:
   web:
     build: ./app  
+    container_name: web-cnt
     ports:
-      - "5000:5000"
+      - "${WEB_PORT}:5000"
     
-    environment:
-      DB_HOST: db
-      DB_NAME: testdb
-      DB_USER: admin
-      DB_PASS: secret
+    environment:      
+      DB_HOST: "${DB_HOST}"
+      DB_NAME: "${DB_NAME}"
+      DB_USER: "${DB_USER}"
+      DB_PASS: "${DB_PASS}"
+
     depends_on:
       - db
+    
+    networks:
+      - app_network 
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    volumes:
+      - web_logs:/app/logs
+
 
   db:
     image: postgres:15
+    container_name: db-cnt
 
     environment:
-      POSTGRES_DB: testdb
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: secret
-    
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASS}"
+
     volumes:
       - db_data:/var/lib/postgresql/data
 
+    networks:
+      - app_network
+
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${DB_USER}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 volumes:
   db_data:
+  web_logs:
 

@@ -1,11 +1,15 @@
-docker-web-db/
-│
-├── app/
-│   ├── app.py
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── docker-compose.yml
+.
 ├── .dockerignore
-└── .github/workflows/docker-scan.yml
+├── .env
+├── .github
+│   └── workflows
+│       └── docker-scan.yml
+├── app
+│   ├── Dockerfile
+│   ├── app.py
+│   └── requirements.txt
+├── docker-compose.yml
+├── postgres_trivy_scan.txt
+└── project_structure.txt
 
+3 directories, 9 files
